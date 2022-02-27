@@ -12,7 +12,7 @@ pipeline {
             steps {
                 sh '''
                     #!/bin/bash
-                    cd /var/lib/jenkins/workspace/semgrep_bash
+                    cd /var/lib/jenkins/workspace/semgrep_scm
                     semgrep --config /home/administrator/Downloads/orangehrm123/orangehrm123/rules/enterprise.yaml > /home/administrator/Desktop/bash_scripts/result_$(date +%F.%T).txt
 
                 '''
