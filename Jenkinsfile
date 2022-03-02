@@ -5,7 +5,10 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout poll: false, scm: [$class: 'SubversionSCM', additionalCredentials: [], excludedCommitMessages: '', excludedRegions: '', excludedRevprop: '', excludedUsers: '', filterChangelog: false, ignoreDirPropChanges: false, includedRegions: '', locations: [[credentialsId: '1', depthOption: 'infinity', ignoreExternalsOption: false, local: 'codebase', remote: 'https://repos.orangehrm.com/enterprise/tags/6.2/symfony/plugins/orangehrmAttendancePlugin/lib/dao/']], quietOperation: false, workspaceUpdater: [$class: 'UpdateWithCleanUpdater']]
-                    
+                sh 'mkdir rules'
+                sh 'cd rules'
+                sh 'git clone https://github.com/janakaperera/semgrep_rules'
+                sh 'cd ../codebase'
            }
         }
         stage('Script') {
@@ -13,7 +16,7 @@ pipeline {
                 sh '''
                     #!/bin/bash
                     cd /var/lib/jenkins/workspace/semgrep_scm
-                    semgrep --config /home/administrator/Downloads/orangehrm123/orangehrm123/rules/62.yaml > /home/administrator/Desktop/bash_scripts/result_$(date +%F.%T).txt
+                    semgrep --config /var/lib/jenkins/workspace/semgrep_scm/rules > /home/administrator/Desktop/bash_scripts/result_$(date +%F.%T).txt
 
                 '''
             }
