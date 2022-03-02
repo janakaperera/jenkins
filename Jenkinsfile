@@ -19,6 +19,13 @@ pipeline {
                 '''
             }
         }
+        post {
+            always {
+              archiveArtifacts "results/phan.xml"
+              step([$class: 'CheckStylePublisher', pattern: 'results/phan.xml'])
+            }
+          }
+        }
         stage('Clean') {
             steps {
                 cleanWs()
