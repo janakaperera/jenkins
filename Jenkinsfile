@@ -19,6 +19,11 @@ pipeline {
                 '''
             }
         }
+        stage('archive') {
+            steps {
+                archiveArtifacts(artifacts: 'result_$(date +%F.%T).txt', followSymlinks: false)
+           }
+        }
         stage('Clean') {
             steps {
                 cleanWs()
