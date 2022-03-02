@@ -17,7 +17,6 @@ pipeline {
                     semgrep --config /var/lib/jenkins/workspace/semgrep_scm/semgrep_rules > /home/administrator/Desktop/bash_scripts/result_$(date +%F.%T).txt
 
                 '''
-                archiveArtifacts "log"
             }
         }
         stage('Clean') {
