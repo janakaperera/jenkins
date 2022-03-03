@@ -12,21 +12,20 @@ pipeline {
             steps {
                 sh '''
                     #!/bin/bash
+                    mkdir results
                     cd /var/lib/jenkins/workspace/semgrep_scm/codebase
-                    semgrep --config /var/lib/jenkins/workspace/semgrep_scm/semgrep_rules > /var/lib/jenkins/workspace/semgrep_scm/result_$(date +%F.%T).txt
+                    semgrep --config /var/lib/jenkins/workspace/semgrep_scm/semgrep_rules > /var/lib/jenkins/workspace/semgrep_scm/results/result_$(date +%F.%T).txt
 
                 '''
             }
         }
-        stage('archive') {
-            steps {
-                archiveArtifacts(artifacts: '**/*.txt', followSymlinks: false)
+         post {
+            always {
+                script{
+                    sh "sudo rm -rf codebase/"
+            }
+               archiveArtifacts "results/**/*.txt" 
            }
-        }
-        stage('Clean') {
-            steps {
-                cleanWs()
-           }
-        }
+             
     }
 }
