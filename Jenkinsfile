@@ -18,8 +18,7 @@ pipeline {
 
                 '''
             }
-        }
-         post {
+            post {
             always {
                 script{
                     sh "sudo rm -rf codebase/"
@@ -27,6 +26,8 @@ pipeline {
                archiveArtifacts "results/**/*.txt" 
            }
          }   
+        }
+         
     }
 }
 
