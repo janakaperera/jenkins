@@ -13,7 +13,7 @@ pipeline {
             steps {
                 sh '''
                     #!/bin/bash
-                    cd /var/lib/jenkins/workspace/semgrep_scm
+                    cd /var/lib/jenkins/workspace/semgrep_scm/codebase
                     semgrep --config /var/lib/jenkins/workspace/semgrep_scm/semgrep_rules > /var/lib/jenkins/workspace/semgrep_scm/result_$(date +%F.%T).txt
 
                 '''
