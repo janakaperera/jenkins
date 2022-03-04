@@ -1,4 +1,3 @@
-@Field def lastFile
 pipeline {
     agent any
 
