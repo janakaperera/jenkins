@@ -21,8 +21,7 @@ pipeline {
             post {
             always {
                 script{
-                    sh "whoami"
-                    sh "sudo rm -rf codebase/"
+                    echo "Complated the script stage"
             }
                archiveArtifacts "results/**/*.txt" 
            }
