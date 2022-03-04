@@ -16,16 +16,16 @@ pipeline {
                     semgrep --config /var/lib/jenkins/workspace/semgrep_scm/semgrep_rules > /var/lib/jenkins/workspace/semgrep_scm/results/result_$(date +%F.%T).txt
 
                 '''
-                sh "cd /var/lib/jenkins/workspace/semgrep_scm/results"
-                lastFile = sh (
-                    script: 'ls -Ar | head -1',
-                    returnStdout: true
-                    ).trim()
             }
             post {
             always {
                 script{
                     echo "Complated the script stage"
+                    sh "cd /var/lib/jenkins/workspace/semgrep_scm/results"
+                    lastFile = sh (
+                    script: 'ls -Ar | head -1',
+                    returnStdout: true
+                    ).trim()
             }
                archiveArtifacts lastFile 
            }
