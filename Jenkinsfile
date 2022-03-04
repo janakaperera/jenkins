@@ -23,7 +23,7 @@ pipeline {
                     echo "Complated the script stage"
                     sh "cd /var/lib/jenkins/workspace/semgrep_scm/results"
                     lastFile = sh (
-                    script: 'ls -Ar | head -1',
+                    script: 'ls /var/lib/jenkins/workspace/semgrep_scm/results -Ar | head -1',
                     returnStdout: true
                     ).trim()
             }
