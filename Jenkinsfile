@@ -1,6 +1,9 @@
 pipeline {
     agent any
-
+    parameters{
+        text(name: 'EMAIL_LIST', defaultValue: 'dheegayu@orangehrmlive.com', description: 'Email List')
+        text(name: 'CODEBASE_PATH', defaultValue: 'https://repos.orangehrm.com/enterprise/trunk/', description: 'Codebase Path')
+    }
     stages {
         stage('Checkout') {
             steps {
