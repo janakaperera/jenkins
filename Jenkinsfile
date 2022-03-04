@@ -28,6 +28,7 @@ pipeline {
                     ).trim()
             }
                archiveArtifacts "results/$lastFile" 
+               echo ${FILE,path="results/$lastFile"},
            }
          } 
             
