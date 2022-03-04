@@ -22,14 +22,15 @@ pipeline {
                 script{
                     echo "Complated the script stage"
             }
-               sh "cd /var/lib/jenkins/workspace/semgrep_scm/results"
+               
+           }
+         } 
+            sh "cd /var/lib/jenkins/workspace/semgrep_scm/results"
                 lastFile = sh (
                     script: 'ls -Ar | head -1',
                     returnStdout: true
                     ).trim()
                archiveArtifacts lastFile 
-           }
-         }   
         }
          
     }
