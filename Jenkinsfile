@@ -1,3 +1,4 @@
+@Field def lastFile
 pipeline {
     agent any
 
@@ -22,7 +23,12 @@ pipeline {
                 script{
                     echo "Complated the script stage"
             }
-               archiveArtifacts "results/**/*.txt" 
+               sh "cd /var/lib/jenkins/workspace/semgrep_scm/results"
+                lastFile = sh (
+                    script: 'ls -Ar | head -1',
+                    returnStdout: true
+                    ).trim()
+               archiveArtifacts lastFile 
            }
          }   
         }
