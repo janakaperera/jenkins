@@ -27,7 +27,7 @@ pipeline {
                     returnStdout: true
                     ).trim()
             }
-               archiveArtifacts lastFile 
+               archiveArtifacts "resulrs/$lastFile" 
            }
          } 
             
