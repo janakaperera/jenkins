@@ -22,7 +22,7 @@ pipeline {
             post {
             always {
                 script{
-                    echo Date()
+                    echo $java.time.LocalDate.now()
                     echo "Complated the script stage"
                     sh "cd /var/lib/jenkins/workspace/semgrep_scm/results"
                     lastFile = sh (
