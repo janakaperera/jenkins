@@ -27,8 +27,6 @@ pipeline {
                     script: 'ls /var/lib/jenkins/workspace/semgrep_scm/results -Ar | head -1',
                     returnStdout: true
                     ).trim()
-		    sh(
-	            script: 'chmod 777 *' )
                     sh (
 		    script: '''awk 'BEGIN{
 	print "<html> <body> <TABLE border=0 cellspacing=3 cellpadding=3 width=100% padding = 10px>"
