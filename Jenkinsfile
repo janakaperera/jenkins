@@ -22,11 +22,38 @@ pipeline {
             post {
             always {
                 script{
-                    echo $java.time.LocalDate.now()
-                    echo "Complated the script stage"
                     sh "cd /var/lib/jenkins/workspace/semgrep_scm/results"
                     lastFile = sh (
                     script: 'ls /var/lib/jenkins/workspace/semgrep_scm/results -Ar | head -1',
+                    returnStdout: true
+                    ).trim()
+                    script: 'awk 'BEGIN{
+	print "<html> <body> <TABLE border=0 cellspacing=3 cellpadding=3 width=100% padding = 10px>"
+    print "<tr bgcolor=green height = 50px>" "<td>" "<font size=6 color=white>" "<b>" "<center>" "Semgrep Results" "</center>" "</b>" "</font>" "</td>" "</tr>"
+    print "<tr bgcolor=blue height = 30px>" "<td>" "<font size=4.4 color=white>" "<b>" "<center>" "Date" "</center>" "</b>" "</font>" "</td>" "</tr>"
+    print "<tr height = 30px>" "<td>" "<font size=4.4 color=black>"  "<b>" "<center>" "Executed date is: "strftime("%F") "</center>" "</b>" "</font>" "</td>" "</tr>"
+    print "<tr bgcolor=blue height = 30px>" "<td>" "<font size=4.4 color=white>" "<b>" "<center>" "Findings" "</center>" "</b>" "</font>" "</td>" "</tr>"
+}
+
+{  
+	print "<TR>"
+        
+		if (substr($1,1,1) ~ /^[0-9]/ )
+			print "<tr>" "<td>""<font size =2> "  $i "</font>" "</td>""</tr>"
+		if (/rule/)
+                        print "<tr height = 20px>" "<td>" "<font size = 2>" $i "</font>" "</td>" "</tr>"
+		if (/symfony/)
+                        print "<tr bgcolor=red height = 30px>" "<td>" "<font color=white size=3>" "<b>" $i "</b>" "</font>" "</td>" "</tr>"
+		if (/upgrader/)
+                        print "<tr bgcolor=red height = 30px>" "<td>" "<font color=white size=3>" "<b>" $i "</b>" "</font>" "</td>" "</tr>"
+	
+	print "</TR>"
+}
+END{
+	print "</TABLE> </body> </html>"
+}' $lastfile > result_$(date +%F.%T).html'
+                    lastHTMLFile = sh (
+                    script: 'ls /var/lib/jenkins/workspace/semgrep_scm/results_html -Ar | head -1',
                     returnStdout: true
                     ).trim()
             }
