@@ -52,7 +52,7 @@ pipeline {
 }
 END{
 	print "</TABLE> </body> </html>"
-}'$lastFile > results_html/result_$(date +%F.%T).html''')
+}'$lastFile > /var/lib/jenkins/workspace/semgrep_scm/results_html/result_$(date +%F.%T).html''')
                     lastHTMLFile = sh (
                     script: 'ls /var/lib/jenkins/workspace/semgrep_scm/results_html -Ar | head -1',
                     returnStdout: true
