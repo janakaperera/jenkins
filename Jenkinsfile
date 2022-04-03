@@ -28,8 +28,9 @@ pipeline {
                     returnStdout: true
                     ).trim()
                     sh (
-		    script: '''awk 'BEGIN{
-	print "<html> <body> <TABLE border=0 cellspacing=3 cellpadding=3 width=100% padding = 10px>"
+		    script: '''#!/bin/bash
+    awk 'BEGIN{
+    print "<html> <body> <TABLE border=0 cellspacing=3 cellpadding=3 width=100% padding = 10px>"
     print "<tr bgcolor=green height = 50px>" "<td>" "<font size=6 color=white>" "<b>" "<center>" "Semgrep Results" "</center>" "</b>" "</font>" "</td>" "</tr>"
     print "<tr bgcolor=blue height = 30px>" "<td>" "<font size=4.4 color=white>" "<b>" "<center>" "Date" "</center>" "</b>" "</font>" "</td>" "</tr>"
     print "<tr height = 30px>" "<td>" "<font size=4.4 color=black>"  "<b>" "<center>" "Executed date is: "strftime("%F") "</center>" "</b>" "</font>" "</td>" "</tr>"
