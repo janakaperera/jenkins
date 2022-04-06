@@ -28,7 +28,10 @@ pipeline {
                     returnStdout: true
                     ).trim()
                     sh (
-		    script: '''awk 'BEGIN{
+		    script: '''
+		    lastFile=ls /var/lib/jenkins/workspace/semgrep_scm/results -Ar | head -1
+		    echo $lastFile
+		    awk 'BEGIN{
     print "<html> <body> <TABLE border=0 cellspacing=3 cellpadding=3 width=100% padding = 10px>"
     print "<tr bgcolor=green height = 50px>" "<td>" "<font size=6 color=white>" "<b>" "<center>" "Semgrep Results" "</center>" "</b>" "</font>" "</td>" "</tr>"
     print "<tr bgcolor=blue height = 30px>" "<td>" "<font size=4.4 color=white>" "<b>" "<center>" "Date" "</center>" "</b>" "</font>" "</td>" "</tr>"
@@ -52,8 +55,8 @@ pipeline {
 }
 END{
 	print "</TABLE> </body> </html>"
-	lastFile=ls /var/lib/jenkins/workspace/semgrep_scm/results -Ar | head -1
-	echo $lastFile
+	
+	
 }' results/$lastFile > result_$(date +%F.%T).html''')
                     lastHTMLFile = sh (
                     script: 'ls /var/lib/jenkins/workspace/semgrep_scm/results_html -Ar | head -1',
