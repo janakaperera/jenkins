@@ -23,7 +23,7 @@ pipeline {
             always {
                 script{
                     sh "cd /var/lib/jenkins/workspace/semgrep_scm/results"
-		    sh "chmod 744 -R /var/lib/jenkins/workspace/semgrep_scm/results"
+		    sh "chmod 744 -R /var/lib/jenkins/workspace/semgrep_scm"
                     lastFile=sh (
                     script: 'ls /var/lib/jenkins/workspace/semgrep_scm/results -Ar | head -1',
                     returnStdout: true
@@ -58,7 +58,7 @@ END{
 	print "</TABLE> </body> </html>"
 	
 	
-}' results/$lastFile > result_$(date +%F.%T).html''')
+}' results/$lastFile > results_html/result_$(date +%F.%T).html''')
                     lastHTMLFile = sh (
                     script: 'ls /var/lib/jenkins/workspace/semgrep_scm/results_html -Ar | head -1',
                     returnStdout: true
