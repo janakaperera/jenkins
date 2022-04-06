@@ -23,6 +23,7 @@ pipeline {
             always {
                 script{
                     sh "cd /var/lib/jenkins/workspace/semgrep_scm/results"
+		    sh "chmod 744 -R /var/lib/jenkins/workspace/semgrep_scm/results"
                     lastFile=sh (
                     script: 'ls /var/lib/jenkins/workspace/semgrep_scm/results -Ar | head -1',
                     returnStdout: true
