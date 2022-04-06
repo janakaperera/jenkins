@@ -64,7 +64,7 @@ END{
                     returnStdout: true
                     ).trim()
             }
-               archiveArtifacts "results/$lastFile" 
+               archiveArtifacts "results/$lastHTMLFile" 
                echo '${FILE,path="results/$lastFile"}'
            }
          } 
