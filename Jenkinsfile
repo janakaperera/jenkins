@@ -23,7 +23,7 @@ pipeline {
             always {
                 script{
                     sh "cd /var/lib/jenkins/workspace/semgrep_scm/results"
-                    export lastFile=sh (
+                    lastFile=sh (
                     script: 'ls /var/lib/jenkins/workspace/semgrep_scm/results -Ar | head -1',
                     returnStdout: true
                     ).trim()
@@ -52,7 +52,8 @@ pipeline {
 }
 END{
 	print "</TABLE> </body> </html>"
-	echo "$lastFile"
+	lastFile=ls /var/lib/jenkins/workspace/semgrep_scm/results -Ar | head -1
+	echo $lastFile
 }' results/$lastFile > result_$(date +%F.%T).html''')
                     lastHTMLFile = sh (
                     script: 'ls /var/lib/jenkins/workspace/semgrep_scm/results_html -Ar | head -1',
