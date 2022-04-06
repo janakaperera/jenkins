@@ -30,7 +30,7 @@ pipeline {
                     ).trim()
                     sh (
 		    script: '''
-		    lastFile=ls /var/lib/jenkins/workspace/semgrep_scm/results -Ar | head -1
+		    lastFile=$(ls /var/lib/jenkins/workspace/semgrep_scm/results -Ar | head -1)
 		    echo $lastFile
 		    awk 'BEGIN{
     print "<html> <body> <TABLE border=0 cellspacing=3 cellpadding=3 width=100% padding = 10px>"
